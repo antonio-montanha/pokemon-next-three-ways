@@ -13,6 +13,7 @@ export default () => {
   const router = useRouter();
   const { data } = useQuery(["name", router.query.name], getPokemon);
   return (
+
     <div>
       <Head>
         <title>{(data && data.name.english) || "Pokemon"}</title>

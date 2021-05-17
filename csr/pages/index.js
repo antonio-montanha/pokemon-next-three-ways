@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
-import { Container, FormControl, Row, Col, Card } from "react-bootstrap";
+import { Container, FormControl, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useQuery } from "react-query";
+import CardComponent from "../components/Card"
 
 const getPokemon = async (key, q) => {
   const { data } = await axios.get(`/api/search?q=${escape(q)}`);
@@ -37,19 +37,12 @@ const Home = () => {
           <Row>
             {data.map(({ id, name, type, image }) => (
               <Col xs={4} key={id} style={{ padding: 5 }}>
-                <Link href={`/pokemon/${name.english}`}>
-                  <Card>
-                    <Card.Img
-                      variant="top"
-                      src={image}
-                      style={{ maxHeight: 300 }}
-                    />
-                    <Card.Body>
-                      <Card.Title>{name.english}</Card.Title>
-                      <Card.Subtitle>{type.join(", ")}</Card.Subtitle>
-                    </Card.Body>
-                  </Card>
-                </Link>
+                
+                  <CardComponent 
+                  image= {image}
+                  name={name.english}
+                  type = {type} />
+                
               </Col>
             ))}
           </Row>
